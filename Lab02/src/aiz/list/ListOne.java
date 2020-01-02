@@ -40,7 +40,7 @@ public class ListOne<T> implements IList<T> {
     public void addAtPosition(T newData, int position) throws ListException {
         elementA=firstElement;
         ElemOne<T> first, third;
-        if(position<=this.size()) {                                               
+        if(position<=this.size()&&position>=0) {                                               
         if(position==0) {this.addFirst(newData);}
         else if(position==this.size()) {this.addLast(newData);}
         else {
@@ -132,7 +132,7 @@ public class ListOne<T> implements IList<T> {
         elementR=firstElement;
         T returnElem;
         ElemOne<T> first, second, third;
-        if(position<=this.size()) {                                               
+        if(position<=this.size()&&position>=0) {                                               
         if(position==0) {returnElem = this.removeFirst();}
         else if(position==this.size()) {returnElem = this.removeLast();}
         else {
