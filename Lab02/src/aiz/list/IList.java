@@ -85,4 +85,5 @@ public interface IList<T> {
      * Wypisuje na ekran zawartosc listy.
      */
     public void print();
+
 }

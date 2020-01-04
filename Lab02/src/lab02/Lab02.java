@@ -54,7 +54,7 @@ public class Lab02 {
         
         // ================ Lista dwukierunkowa ================
         
-        ListTwo listTwo = new ListTwo();
+        /* ListTwo listTwo = new ListTwo();
         // indeksowanie pozycji od 0
         System.out.println("=========== metoda addLast ===========");
         listTwo.addLast(1);
@@ -90,8 +90,23 @@ public class Lab02 {
         System.out.println("=========== metoda find ===========");
         listTwo.print();
         System.out.println("Wyszukanie elementu: tekst01, indeks: "+listTwo.find("tekst01"));
-        System.out.println("Wyszukanie elementu: tekst03, indeks: "+listTwo.find("tekst03"));
-       
+        System.out.println("Wyszukanie elementu: tekst03, indeks: "+listTwo.find("tekst03")); */
+        
+        
+        // obie listy musza miec ten sam rozmiar, by uniknac sytuacji, w ktorej lista jednoelementowa, bedzie podobna do listy, ktora zawiera wiele elementow
+        
+        ListTwo listThree = new ListTwo();
+        listThree.addLast(1);
+        listThree.addLast(2); 
+        listThree.addLast(3);
+        
+        ListTwo listFour = new ListTwo();
+        listFour.addLast(3);
+        listFour.addLast(2); 
+        listFour.addLast(1);
+        
+        System.out.println("Czy podobne: "+listThree.similar(listFour));
+        listFour.print();
     }
     
 }

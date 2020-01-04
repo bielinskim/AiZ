@@ -4,6 +4,10 @@ package aiz.list;
 public class ListTwo<T> implements IList<T>  {
 
     private ElemTwo<T> firstElement, lastElement;
+
+    public ElemTwo<T> getFirstElement() {
+        return firstElement;
+    }
     
     @Override
     public void addFirst(T newData) {
@@ -12,7 +16,7 @@ public class ListTwo<T> implements IList<T>  {
             firstElement = firstElement.getPrev();
         }
         else {
-            firstElement = new ElemTwo(newData);
+            firstElement = new ElemTwo(null, newData, null);
             lastElement = firstElement;
         }
     }
@@ -24,7 +28,7 @@ public class ListTwo<T> implements IList<T>  {
             lastElement = lastElement.getNext();
         }
         else {
-            firstElement = new ElemTwo(newData);
+            firstElement = new ElemTwo(null, newData, null);
             lastElement = firstElement;
         }
     }
@@ -32,7 +36,7 @@ public class ListTwo<T> implements IList<T>  {
     @Override
     public void addAtPosition(T newData, int position) throws ListException {
         ElemTwo<T> element = firstElement;
-        ElemTwo<T> prev, next;
+        ElemTwo<T> prev ,next;
         int size = this.size();
         if(position<=size  && position>=0) {
         if(position==0) {this.addFirst(newData);}
@@ -86,7 +90,6 @@ public class ListTwo<T> implements IList<T>  {
 
     @Override
     public T removeLast() throws ListException {
-        ElemTwo<T> element;
         T data;
         if(firstElement!=null) {
         if(firstElement.getNext()==null) {
@@ -94,10 +97,10 @@ public class ListTwo<T> implements IList<T>  {
             firstElement = null;
         }
         else {
-            data = lastElement.getData();
-            element = lastElement.getPrev();
-            element.setNext(null);
-            lastElement = element;
+           data = lastElement.getData();
+           lastElement = lastElement.getPrev();
+           lastElement.setNext(null);
+            
         }
         }
         else {
@@ -112,9 +115,9 @@ public class ListTwo<T> implements IList<T>  {
         ElemTwo<T> first, second, third;
         T data;
         int size = this.size();
-        if(position<=size && position>=0) {
+        if(position<size && position>=0) {
         if(position==0) {data = this.removeFirst();}
-        else if(position==size) {data = this.removeLast();}
+        else if(position==size-1) {data = this.removeLast();}
         else {
             for(int i=0; i<=position-2; i++) {
                 element = element.getNext();
@@ -123,7 +126,9 @@ public class ListTwo<T> implements IList<T>  {
             second = element.getNext();
             third = second.getNext();
             first.setNext(third);
+            third.setPrev(first);
             data = second.getData();
+            
         }
         }
         else {
@@ -138,7 +143,7 @@ public class ListTwo<T> implements IList<T>  {
         int indexOfElement = 0;
         if(element!=null) {
           while(element!=null) {
-           if(dataToFind==element.getData()) {return indexOfElement;};  
+           if(dataToFind==element.getData()) {return indexOfElement;}  
            indexOfElement++;
            element = element.getNext();
            }   
@@ -157,7 +162,31 @@ public class ListTwo<T> implements IList<T>  {
        }
        return false;
     }
-
+    public boolean similar(ListTwo argList) throws ListException {
+        ElemTwo<T> element = firstElement;
+        int argListSize = argList.size();
+        int thisListSize = this.size();
+        ListTwo listOfElements = new ListTwo();
+        ListTwo listOfIndexes = new ListTwo();
+        if(element!=null && argListSize!=0 && argListSize==thisListSize) {
+            while(element!=null) {
+                int indexOfElement = argList.find(element.getData());
+                if(indexOfElement!=-1) { 
+                listOfElements.addLast(element.getData());
+                listOfIndexes.addLast(indexOfElement);
+                argList.remove(indexOfElement);
+                element = element.getNext();           
+                }
+                else {
+                    argList.insertBackElements(listOfElements, listOfIndexes, argList);
+                    return false;
+                }
+            }
+            argList.insertBackElements(listOfElements, listOfIndexes, argList);
+            return true;                         
+        }  
+        return false;
+    }
     @Override
     public void print() {
        ElemTwo<T> element = firstElement;
@@ -169,5 +198,16 @@ public class ListTwo<T> implements IList<T>  {
             }
         }
     }
-    
+    public void insertBackElements(ListTwo<T> listOfElements, ListTwo<T> listOfIndexes, ListTwo argList) throws ListException {
+        int indexOfElement;
+        T data;
+        int size = listOfElements.size();
+        for(int i=0; i<size; i++) {
+            indexOfElement = (int) listOfIndexes.removeLast();
+            data = listOfElements.removeLast();
+            argList.addAtPosition(data, indexOfElement);
+           
+        }
+        
+    }   
 }

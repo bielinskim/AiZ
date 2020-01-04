@@ -131,10 +131,11 @@ public class ListOne<T> implements IList<T> {
     public T remove(int position) throws ListException {
         elementR=firstElement;
         T returnElem;
+        int size = this.size();
         ElemOne<T> first, second, third;
-        if(position<=this.size()&&position>=0) {                                               
+        if(position<size&&position>=0) {                                               
         if(position==0) {returnElem = this.removeFirst();}
-        else if(position==this.size()) {returnElem = this.removeLast();}
+        else if(position==size-1) {returnElem = this.removeLast();}
         else {
         for(int i=0; i<=position-2; i++) {                               // uzyskanie elementu przed podana pozycja
              elementR = elementR.getNext();
