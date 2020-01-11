@@ -1,5 +1,8 @@
 package lab03;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Student
@@ -58,7 +61,78 @@ public class Graph extends AGraph {
 
     @Override
     public void writeList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(int i=0; i<size; i++)
+        {   
+            for(int j=0; j<size; j++)
+            {
+            if(graph[i][j]==1)
+            {
+             System.out.println("("+i+" , "+j+")");   
+            }
+            }
+           
+        }
+    }
+    
+    public void topsWithNNeighbours(int nb) {
+        int numberOfNB;
+        for(int i=0; i<size; i++)
+        {
+           numberOfNB = 0;
+           for(int j=0; j<size; j++)
+           {
+               if(graph[i][j]==1&&graph[i][i]!=1)
+               {
+                   numberOfNB++;
+               }
+           }
+           if(numberOfNB==nb)
+           {
+             System.out.println(i);  
+           }
+        }
+    }
+    
+    public void topsWithMostEdges()
+    {
+        int[] arrayOfTops = new int[size];
+        int numberOfEdges;
+        int max = 0;
+        for(int i=0; i<size; i++)
+        {
+          numberOfEdges =0;
+        for(int j=0; j<size; j++)
+           {
+               if(graph[i][j]==1&&j!=i)
+               {
+                arrayOfTops[i] = numberOfEdges++;
+               }
+           
+               if(graph[j][i]==1&&j!=i)
+               {
+                   arrayOfTops[i] = numberOfEdges++;
+               }
+              }
+        }
+        for(int i=0; i<size; i++)
+        {
+        System.out.println("Wierzcholek "+i+" : "+arrayOfTops[i]);
+        if(arrayOfTops[i]>max)
+        {
+          max = arrayOfTops[i];  
+        }
+       
+        }
+         System.out.println("===============");
+        for(int i=0; i<size; i++)
+        {
+           if(arrayOfTops[i]==max)
+        {
+         System.out.println("Wierzcholek "+i+" : "+arrayOfTops[i]);
+        } 
+        }
+        
+        
     }
     
 }
