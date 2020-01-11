@@ -29,7 +29,7 @@ public class Lab03 {
         
         System.out.println("Wierzcholki z 2 sasiadami: ");
         graph.topsWithNNeighbours(2);
-         System.out.println("===============");
+        System.out.println("=========================");
         graph.topsWithMostEdges();
     }
     
