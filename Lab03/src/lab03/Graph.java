@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  *
- * @author Student
+ * @author bielinskim
  */
 public class Graph extends AGraph {
 
