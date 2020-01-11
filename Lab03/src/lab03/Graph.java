@@ -63,14 +63,15 @@ public class Graph extends AGraph {
     public void writeList() {
         for(int i=0; i<size; i++)
         {   
+            System.out.print(i+" :");   
             for(int j=0; j<size; j++)
             {
-            if(graph[i][j]==1)
+            if(graph[i][j]==1&&i!=j)
             {
-             System.out.println("("+i+" , "+j+")");   
+             System.out.print(" "+j);   
             }
             }
-           
+           System.out.println();   
         }
     }
     

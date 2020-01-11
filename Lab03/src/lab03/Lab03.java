@@ -23,13 +23,13 @@ public class Lab03 {
         
         System.out.println(graph.check(2, 4));
         System.out.println(graph.check(0, 4));
-        
+        System.out.println("=========================");
         graph.writeMatrix();
+        System.out.println("=========================");
         graph.writeList();
         
         System.out.println("Wierzcholki z 2 sasiadami: ");
         graph.topsWithNNeighbours(2);
-        System.out.println("=========================");
         System.out.println("=========================");
         graph.topsWithMostEdges();
     }
