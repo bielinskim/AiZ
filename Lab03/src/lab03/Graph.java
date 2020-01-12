@@ -2,6 +2,7 @@ package lab03;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -42,7 +43,7 @@ public class Graph extends AGraph {
     @Override
     public boolean check(int i, int j) throws IllegalArgumentException {
       try {
-        if(i<=size||j<=size) {
+        if(i<=size&&j<=size) {
           if(graph[i][j]==1){return true;}
           else {return false;}}
         else {
@@ -56,7 +57,7 @@ public class Graph extends AGraph {
     @Override
     public void connect(int i, int j) throws IllegalArgumentException {
        try {
-        if(i<=size||j<=size) {
+        if(i<=size&&j<=size&&i!=j) {
           graph[i][j] = 1;
         }
         else {
@@ -141,14 +142,14 @@ public class Graph extends AGraph {
     }
     
     
-    public void bfs(int vArg) {
+    /* public void bfs(int vArg) {
         
         Queue<Vertex> Q = new ArrayDeque<>();
-        List<Vertex> vertexes = new ArrayList();
+        List<Vertex> vertices = new ArrayList();
         for(int i=0; i<size; i++) {
-            vertexes.add(new Vertex(false, 0, null));
+            vertices.add(new Vertex(false, 0, null));
         }
-        Vertex v = vertexes.get(vArg);
+        Vertex v = vertices.get(vArg);
         v.setVisited(true);
         Vertex u;
         Q.add(v);
@@ -157,9 +158,9 @@ public class Graph extends AGraph {
         while(!Q.isEmpty())
         {
             v = Q.remove();
-            int i = vertexes.indexOf(v);
+            int i = vertices.indexOf(v);
             for(int j=0; j<size; j++) {
-                u = vertexes.get(j);
+                u = vertices.get(j);
                 if(graph[i][j]==1&&!u.isVisited()) {
                      
                      System.out.print(" -> "+j);
@@ -170,7 +171,68 @@ public class Graph extends AGraph {
                 }
             }
         }
+        System.out.print(" || Pozostałe: ");
+        for(int i=0; i<size; i++) {
+            u = vertices.get(i);
+            if(!u.isVisited()) {
+                System.out.print(i+" ");
+            }
+        }
         System.out.println();
-    } 
+    }   */
     
+    public void bfs(int vArg) {
+        
+        LinkedList<Integer> Q = new LinkedList<>();
+        boolean[] visited = new boolean[size];
+        int[] distance = new int[size];
+        for(int i=0; i<size; i++) {
+            
+            visited[i] = false;
+        }
+        visited[vArg] = true;
+        Q.add(vArg);
+        int v;
+        
+        System.out.print(vArg);
+        
+        while(!Q.isEmpty())
+        {
+            v = Q.remove();
+            for(int u=0; u<size; u++) {
+                if(graph[v][u]==1&&!visited[u]) {
+                     System.out.print(" -> "+u);
+                     visited[u] = true;
+                     distance[u] = distance[v]+1;
+                     System.out.print(" (Odległość od v: "+distance[u]+")");
+                     Q.add(u);
+                }
+            }
+        }
+        System.out.print(" || Pozostałe: ");
+        for(int i=0; i<size; i++) {
+            if(!visited[i]) {
+                System.out.print(i+" ");
+            }
+        }
+        System.out.println();
+    }   
+    
+    public void dfs() {
+        LinkedList<Integer> Q = new LinkedList<>();
+        boolean[] visited = new boolean[size];
+        int[] distance = new int[size];
+        for(int i=0; i<size; i++) {
+            
+            visited[i] = false;
+        }
+        int time = 0;
+        for(int i=0; i<size; i++) {
+            
+        }
+        
+    }
+    public void odwiedzaj() {
+            
+        }
 }

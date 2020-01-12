@@ -6,6 +6,7 @@ package lab03;
  */
 public class Vertex {
     
+    public int index;
     public boolean visited;
     public int distance;
     public Vertex parent;
@@ -16,7 +17,18 @@ public class Vertex {
         this.parent = null;
         
     }
-
+    public Vertex(int index, boolean visited, int distance, Vertex parent) {
+        this.index = index;
+        this.visited = false;
+        this.distance = 0;
+        this.parent = null;
+        
+    }
+    
+    public int getIndex() {
+        return index;
+    }
+    
     public boolean isVisited() {
         return visited;
     }
@@ -29,6 +41,10 @@ public class Vertex {
         return parent;
     }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    
     public void setVisited(boolean visited) {
         this.visited = visited;
     }

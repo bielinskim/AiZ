@@ -33,7 +33,7 @@ public class Lab03 {
         System.out.println("==== Wierzchołek/ki z najwiekszą ilościa krawędzi: ====");
         graph.vertexesWithMostEdges();
         
-        graph.bfs(0);
+        graph.bfs(3);
     }
     
 }
