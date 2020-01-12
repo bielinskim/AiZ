@@ -29,9 +29,11 @@ public class Lab03 {
         graph.writeList();
         
         System.out.println("Wierzcholki z 2 sasiadami: ");
-        graph.topsWithNNeighbours(2);
+        graph.vertexesWithNNeighbours(2);
         System.out.println("=========================");
-        graph.topsWithMostEdges();
+        graph.vertexesWithMostEdges();
+        
+        graph.bfs(0);
     }
     
 }

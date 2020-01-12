@@ -1,7 +1,7 @@
 package lab03;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 /**
  *
@@ -33,7 +33,7 @@ public class Graph extends AGraph {
             {
             System.out.print(graph[i][j]+" ");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -46,18 +46,7 @@ public class Graph extends AGraph {
     }
 
     @Override
-    public void connect(int iArg, int jArg) throws IllegalArgumentException {
-        for(int i=0; i<size; i++)
-        {
-            for(int j=0; j<size; j++)
-            {
-                if(i==iArg&&j==jArg)
-                {
-                    graph[i][j] = 1;
-                }
-            }
-        }
-    }
+    public void connect(int i, int j) throws IllegalArgumentException {graph[i][j] = 1;}
 
     @Override
     public void writeList() {
@@ -75,65 +64,92 @@ public class Graph extends AGraph {
         }
     }
     
-    public void topsWithNNeighbours(int nb) {
-        int numberOfNB;
+    public void vertexesWithNNeighbours(int argNumberOfNeighbours) {
+        int thisNumberOfNeighbours;
         for(int i=0; i<size; i++)
         {
-           numberOfNB = 0;
+           thisNumberOfNeighbours = 0;
            for(int j=0; j<size; j++)
            {
                if(graph[i][j]==1&&graph[i][i]!=1)
                {
-                   numberOfNB++;
+                   thisNumberOfNeighbours++;
                }
            }
-           if(numberOfNB==nb)
+           if(thisNumberOfNeighbours==argNumberOfNeighbours)
            {
              System.out.println(i);  
            }
         }
     }
     
-    public void topsWithMostEdges()
+    public void vertexesWithMostEdges()
     {
-        int[] arrayOfTops = new int[size];
+        int[] numberOfEdgesForEachVertex = new int[size];
         int numberOfEdges;
         int max = 0;
         for(int i=0; i<size; i++)
         {
           numberOfEdges =0;
-        for(int j=0; j<size; j++)
-           {
+          for(int j=0; j<size; j++)
+          {
                if(graph[i][j]==1&&j!=i)
                {
-                arrayOfTops[i] = numberOfEdges++;
+                numberOfEdgesForEachVertex[i] = numberOfEdges++;
                }
            
                if(graph[j][i]==1&&j!=i)
                {
-                   arrayOfTops[i] = numberOfEdges++;
+                   numberOfEdgesForEachVertex[i] = numberOfEdges++;
                }
-              }
+           }
         }
         for(int i=0; i<size; i++)
         {
-        System.out.println("Wierzcholek "+i+" : "+arrayOfTops[i]);
-        if(arrayOfTops[i]>max)
+        if(numberOfEdgesForEachVertex[i]>max)
         {
-          max = arrayOfTops[i];  
+          max = numberOfEdgesForEachVertex[i];  
         }
        
         }
-         System.out.println("===============");
         for(int i=0; i<size; i++)
         {
-           if(arrayOfTops[i]==max)
+           if(numberOfEdgesForEachVertex[i]==max)
         {
-         System.out.println("Wierzcholek "+i+" : "+arrayOfTops[i]);
+         System.out.println("Wierzcholek "+i+" : "+numberOfEdgesForEachVertex[i]);
         } 
         }
+    }
+    
+    public void bfs(int vArg) {
         
-        
+        Queue<Vertex> Q = new ArrayDeque<>();
+        for(int i=0; i<size-1; i++) {
+            Q.add(new Vertex(0, false, 0, null));
+        }
+        Vertex vertex = new Vertex(vArg, true, 0, null);
+        Q.add(vertex);
+        System.out.println(vArg+" -> ");
+        Vertex u = new Vertex(size, true, 0, null);
+        while(!Q.isEmpty())
+        {
+            Vertex v = Q.remove();
+            int j = v.getIndex();
+            for(int i=0; i<size; i++) {
+                if(graph[j][i]==1) {
+                  
+                  if(v.isVisited()) {
+                     System.out.print(i+" -> ");
+                     v.setIndex(i);
+                     v.setVisited(true);
+                     v.setDistance(v.getParent().getDistance()+1);
+                     v.setParent(v);  
+                     Q.add(v);
+                   }
+                  u = Q.peek();
+                }
+            }
+        }
     }
     
 }
