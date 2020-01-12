@@ -1,6 +1,8 @@
 package lab03;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -39,14 +41,31 @@ public class Graph extends AGraph {
 
     @Override
     public boolean check(int i, int j) throws IllegalArgumentException {
-        if(graph[i][j]==1){
-            return true;
-        }
-        else {return false;}
+      try {
+        if(i<=size||j<=size) {
+          if(graph[i][j]==1){return true;}
+          else {return false;}}
+        else {
+           throw new IllegalArgumentException();
+          }
+      }  
+      catch(IllegalArgumentException a) {System.err.println("Niepoprawny parametr");} 
+      finally {return false;}
     }
 
     @Override
-    public void connect(int i, int j) throws IllegalArgumentException {graph[i][j] = 1;}
+    public void connect(int i, int j) throws IllegalArgumentException {
+       try {
+        if(i<=size||j<=size) {
+          graph[i][j] = 1;
+        }
+        else {
+           throw new IllegalArgumentException();
+          }
+      }  
+      catch(IllegalArgumentException a) {System.err.println("Niepoprawny parametr");} 
+      finally {}
+    }
 
     @Override
     public void writeList() {
@@ -121,35 +140,39 @@ public class Graph extends AGraph {
         }
     }
     
+    
     public void bfs(int vArg) {
         
         Queue<Vertex> Q = new ArrayDeque<>();
-        for(int i=0; i<size-1; i++) {
-            Q.add(new Vertex(0, false, 0, null));
+        List<Vertex> vertexes = new ArrayList();
+        for(int i=0; i<size; i++) {
+            vertexes.add(new Vertex(0, false, 0, null));
         }
-        Vertex vertex = new Vertex(vArg, true, 0, null);
-        Q.add(vertex);
-        System.out.println(vArg+" -> ");
-        Vertex u = new Vertex(size, true, 0, null);
+        Vertex v = vertexes.get(vArg);
+        v.setVisited(true);
+        Vertex u;
+        Q.add(v);
+        System.out.print(vArg);
+        
         while(!Q.isEmpty())
         {
-            Vertex v = Q.remove();
-            int j = v.getIndex();
-            for(int i=0; i<size; i++) {
-                if(graph[j][i]==1) {
-                  
-                  if(v.isVisited()) {
-                     System.out.print(i+" -> ");
-                     v.setIndex(i);
-                     v.setVisited(true);
-                     v.setDistance(v.getParent().getDistance()+1);
-                     v.setParent(v);  
-                     Q.add(v);
-                   }
-                  u = Q.peek();
+            v = Q.remove();
+            int i = vertexes.indexOf(v);
+            for(int j=0; j<size; j++) {
+                u = vertexes.get(j);
+                if(graph[i][j]==1&&!u.isVisited()) {
+                     
+                     System.out.print(" -> "+j);
+                     u.setVisited(true);
+                     u.setDistance(v.getDistance()+1); 
+                     Q.add(u);
                 }
             }
         }
-    }
+        System.out.println();
+    } 
+    
+    
+    
     
 }
