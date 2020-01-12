@@ -23,14 +23,14 @@ public class Lab03 {
         
         System.out.println(graph.check(2, 4));
         System.out.println(graph.check(0, 4));
-        System.out.println("=========================");
+        System.out.println("==== Macierz sąsiedztwa grafu ====");
         graph.writeMatrix();
-        System.out.println("=========================");
+        System.out.println("==== Lista sąsiedztwa grafu ====");
         graph.writeList();
         
-        System.out.println("Wierzcholki z 2 sasiadami: ");
+        System.out.println("==== Wierzchołki z 2 sasiadami: ====");
         graph.vertexesWithNNeighbours(2);
-        System.out.println("=========================");
+        System.out.println("==== Wierzchołek/ki z najwiekszą ilościa krawędzi: ====");
         graph.vertexesWithMostEdges();
         
         graph.bfs(0);

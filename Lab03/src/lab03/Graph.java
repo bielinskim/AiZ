@@ -146,7 +146,7 @@ public class Graph extends AGraph {
         Queue<Vertex> Q = new ArrayDeque<>();
         List<Vertex> vertexes = new ArrayList();
         for(int i=0; i<size; i++) {
-            vertexes.add(new Vertex(0, false, 0, null));
+            vertexes.add(new Vertex(false, 0, null));
         }
         Vertex v = vertexes.get(vArg);
         v.setVisited(true);
@@ -165,14 +165,12 @@ public class Graph extends AGraph {
                      System.out.print(" -> "+j);
                      u.setVisited(true);
                      u.setDistance(v.getDistance()+1); 
+                     System.out.print(" (Odległość od v: "+u.getDistance()+")");
                      Q.add(u);
                 }
             }
         }
         System.out.println();
     } 
-    
-    
-    
     
 }

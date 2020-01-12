@@ -6,23 +6,17 @@ package lab03;
  */
 public class Vertex {
     
-    public int index;
     public boolean visited;
     public int distance;
     public Vertex parent;
 
-    public Vertex(int index, boolean visited, int distance, Vertex parent) {
-        this.index = index;
+    public Vertex(boolean visited, int distance, Vertex parent) {
         this.visited = false;
         this.distance = 0;
         this.parent = null;
         
     }
 
-    public int getIndex() {
-        return index;
-    }
-    
     public boolean isVisited() {
         return visited;
     }
@@ -33,10 +27,6 @@ public class Vertex {
 
     public Vertex getParent() {
         return parent;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
     }
 
     public void setVisited(boolean visited) {
