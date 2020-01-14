@@ -1,10 +1,6 @@
 package lab03;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 
 /**
  *
@@ -12,7 +8,13 @@ import java.util.Queue;
  */
 public class Graph extends AGraph {
 
-    int[][] graph = new int[size][size];
+    private int[][] graph = new int[size][size];
+    
+    private boolean[] visited;
+    private int[] start;
+    private int[] end;
+    private int[] parent;
+    private int time;
     
     
     public Graph(int vertexCount) {
@@ -198,14 +200,14 @@ public class Graph extends AGraph {
         
         while(!Q.isEmpty())
         {
-            v = Q.remove();
+            v = Q.remove();                                                     // remove zdejmuje pierwszy element z listy
             for(int u=0; u<size; u++) {
                 if(graph[v][u]==1&&!visited[u]) {
                      System.out.print(" -> "+u);
                      visited[u] = true;
                      distance[u] = distance[v]+1;
                      System.out.print(" (Odległość od v: "+distance[u]+")");
-                     Q.add(u);
+                     Q.add(u);                                                   // add dodaje na koniec
                 }
             }
         }
@@ -219,20 +221,43 @@ public class Graph extends AGraph {
     }   
     
     public void dfs() {
-        LinkedList<Integer> Q = new LinkedList<>();
-        boolean[] visited = new boolean[size];
-        int[] distance = new int[size];
+        visited = new boolean[size];
+        start = new int[size];
+        end = new int[size];
+        parent = new int[size];
+        time = 0;
+        parent[0] = -1;
         for(int i=0; i<size; i++) {
             
             visited[i] = false;
+            start[i] = end[i] = 0;
         }
-        int time = 0;
+        for(int i=0; i<size; i++) {
+            if(!visited[i]) {
+                visit(i);
+            }
+        }
+        System.out.println();
         for(int i=0; i<size; i++) {
             
+            System.out.println("Poczatek: "+start[i]);
+            System.out.println("Koniec: "+end[i]);
+            System.out.println("Rodzic "+parent[i]);
         }
-        
     }
-    public void odwiedzaj() {
-            
+    public void visit(int u) {
+            visited[u] = true;
+            time = time +1;
+            start[u] = time;
+            System.out.print(u+" -> ");
+            for(int i=0; i<size; i++) {
+                if(graph[u][i]==1&&!visited[i]) {
+                    parent[i] = u;
+                    
+                    visit(i);
+                }
+            }
+            time = time+1;
+            end[u] = time;
         }
 }
