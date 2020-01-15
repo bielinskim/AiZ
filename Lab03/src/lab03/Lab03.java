@@ -21,20 +21,6 @@ public class Lab03 {
         graph.connect(3, 1);
         graph.connect(1, 3); 
         
-        System.out.println(graph.check(2, 4));
-        System.out.println(graph.check(0, 4));
-        System.out.println("==== Macierz sąsiedztwa grafu ====");
-        graph.writeMatrix();
-        System.out.println("==== Lista sąsiedztwa grafu ====");
-        graph.writeList();
-        
-        System.out.println("==== Wierzchołki z 2 sasiadami: ====");
-        graph.vertexesWithNNeighbours(2);
-        System.out.println("==== Wierzchołek/ki z najwiekszą ilościa krawędzi: ====");
-        graph.vertexesWithMostEdges();
-        
-        graph.bfs(3);
-        
         Graph graph2 = new Graph(8);
         graph2.connect(0, 1);
         graph2.connect(0, 2);
@@ -44,10 +30,33 @@ public class Lab03 {
         graph2.connect(2, 6);
         graph2.connect(4, 7);
         
+        /* System.out.println(graph.check(2, 4));
+        System.out.println(graph.check(0, 4));
+        System.out.println("==== Macierz sąsiedztwa grafu ====");
+        graph.writeMatrix();
+        System.out.println("==== Lista sąsiedztwa grafu ====");
+        graph.writeList();
+        
+        System.out.println("==== Wierzchołki z 2 sasiadami: ====");
+        graph.vertexesWithNNeighbours(2);
+        System.out.println("==== Wierzchołek/ki z najwiekszą ilościa krawędzi: ====");
+        graph.vertexesWithMostEdges(); */
+         
+        
+        System.out.println("==== Algorytm BFS: ====");
+        graph.bfs(3);
         graph2.bfs(0);
+        System.out.println("=======================");
         
         graph2.writeMatrix();
+        System.out.println("==== Algorytm DFS: ====");
         graph2.dfs();
+        
+        System.out.println("==== Metoda equals: ====");
+        System.out.println(graph.equals(graph));
+        System.out.println(graph.equals(graph2));
+        System.out.println("==== Tablica incydencji grafu: ====");
+        graph.writeIncidence();
         
         
     }

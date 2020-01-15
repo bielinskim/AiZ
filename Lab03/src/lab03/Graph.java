@@ -1,6 +1,8 @@
 package lab03;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -52,7 +54,7 @@ public class Graph extends AGraph {
            throw new IllegalArgumentException();
           }
       }  
-      catch(IllegalArgumentException a) {System.err.println("Niepoprawny parametr");} 
+      catch(IllegalArgumentException a) {System.err.println("Niepoprawny parametr: "+i+" , "+j);} 
       finally {return false;}
     }
 
@@ -66,7 +68,7 @@ public class Graph extends AGraph {
            throw new IllegalArgumentException();
           }
       }  
-      catch(IllegalArgumentException a) {System.err.println("Niepoprawny parametr");} 
+      catch(IllegalArgumentException a) {System.err.println("Niepoprawny parametr: "+i+" , "+j);} 
       finally {}
     }
 
@@ -260,4 +262,66 @@ public class Graph extends AGraph {
             time = time+1;
             end[u] = time;
         }
+    
+    public boolean equals(int[][] argGraph) {
+        for(int i=0; i<size; i++) {
+            for(int j=0; j<size; j++) {
+                if(graph[i][j]!=argGraph[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    public void writeIncidence() {
+        int[] edge;
+        List<int[]> listOfEdges = new ArrayList<>();
+         
+        for(int i=0; i<size; i++) {
+            for(int j=0; j<size; j++) {
+                if(graph[i][j]==1&&i!=j) {
+                    edge = new int[2];
+                    edge[0] = i;
+                    edge[1] = j;
+                    listOfEdges.add(edge);
+                }
+            }
+        }
+        int[][] arrayOfGraphIncidence = new int[size][listOfEdges.size()];
+        
+        for(int i=0; i<size; i++) {
+            for(int j=0; j<listOfEdges.size(); j++) {
+                edge = listOfEdges.get(j);
+                if(i==edge[0]) {
+                    arrayOfGraphIncidence[i][j] = 1;
+                }
+                else if(i==edge[1]) {
+                     arrayOfGraphIncidence[i][j] = -1;
+                }
+            }
+        }
+        
+        System.out.print("  ");
+        for(int i=0; i<listOfEdges.size(); i++) {
+            edge = listOfEdges.get(i);
+            
+            System.out.print("("+edge[0]+","+edge[1]+")");
+        }
+        System.out.println("");
+        for(int i=0; i<size; i++) {   
+            System.out.print(i);
+            for(int j=0; j<listOfEdges.size(); j++)
+            {
+                if(arrayOfGraphIncidence[i][j]==-1) {
+                System.out.print("   "+arrayOfGraphIncidence[i][j]);
+                }
+                else {
+                    System.out.print("    "+arrayOfGraphIncidence[i][j]);
+                }
+            }
+            System.out.println();
+        }
+            
+    }
 }
