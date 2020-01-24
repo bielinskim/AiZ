@@ -234,7 +234,7 @@ public class Graph extends AGraph {
             visited[i] = false;
             start[i] = end[i] = 0;
         }
-        for(int i=0; i<size; i++) {
+        for(int i=0; i<size; i++) {                     
             if(!visited[i]) {
                 visit(i);
             }
@@ -251,12 +251,11 @@ public class Graph extends AGraph {
             visited[u] = true;
             time = time +1;
             start[u] = time;
-            System.out.print(u+" -> ");
-            for(int i=0; i<size; i++) {
-                if(graph[u][i]==1&&!visited[i]) {
-                    parent[i] = u;
-                    
-                    visit(i);
+            System.out.print(u+" -> ");                       
+            for(int i=0; i<size; i++) {                       // jesli dojdzie do konca "galezi" to poprzednia petla jest kontynuowana
+                if(graph[u][i]==1&&!visited[i]) {             
+                    parent[i] = u;                                                                          
+                    visit(i);   
                 }
             }
             time = time+1;
@@ -278,26 +277,26 @@ public class Graph extends AGraph {
         int[] edge;
         List<int[]> listOfEdges = new ArrayList<>();
          
-        for(int i=0; i<size; i++) {
+        for(int i=0; i<size; i++) {                     // utworzenie listy krawedzi z wierzcholkami wchodzacymi i wychodzacymi
             for(int j=0; j<size; j++) {
                 if(graph[i][j]==1&&i!=j) {
-                    edge = new int[2];
+                    edge = new int[2];                  
                     edge[0] = i;
                     edge[1] = j;
                     listOfEdges.add(edge);
                 }
             }
         }
-        int[][] arrayOfGraphIncidence = new int[size][listOfEdges.size()];
+        int[][] arrayOfGraphIncidence = new int[size][listOfEdges.size()];       // utworzenie tablicy wierzcholkow i krawedzi
         
         for(int i=0; i<size; i++) {
-            for(int j=0; j<listOfEdges.size(); j++) {
+            for(int j=0; j<listOfEdges.size(); j++) {          // sprawdzanie czy dla kazdego wierzcholka czy istnieje krawedz wchodzaca i wychodzaca
                 edge = listOfEdges.get(j);
                 if(i==edge[0]) {
-                    arrayOfGraphIncidence[i][j] = 1;
+                    arrayOfGraphIncidence[i][j] = 1;           // jesli istnieje wychodzaca to 1
                 }
                 else if(i==edge[1]) {
-                     arrayOfGraphIncidence[i][j] = -1;
+                     arrayOfGraphIncidence[i][j] = -1;         // jesli istnieje wchodzaca to -1
                 }
             }
         }
