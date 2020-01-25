@@ -112,13 +112,37 @@ public class implBTN extends BTN {
     }
 
     @Override
-    public boolean searchBSTRec(int szukany) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean searchBSTRec(int szukany) { 
+        if(dane==szukany) {
+            return true;
+        }
+        if(szukany>dane&&prawy!=null) {    
+             return prawy.searchBSTRec(szukany);
+        }
+        if(szukany<dane&&lewy!=null) {
+              return lewy.searchBSTRec(szukany);
+        }
+        return false;
     }
-
     @Override
     public void addBSTRec(int nowy) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(nowy>dane) {    
+            if(prawy!=null) {
+            prawy.searchBSTRec(nowy);
+            }
+            else {
+                System.out.print("test"); 
+                prawy = new implBTN(nowy);
+            }
+        }
+        if(nowy<dane) {
+            if(lewy!=null) {
+              lewy.searchBSTRec(nowy);
+            }
+            else {
+                lewy = new implBTN(nowy);
+            }
+        }
     }
 
     @Override
