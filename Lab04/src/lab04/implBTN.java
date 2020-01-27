@@ -128,16 +128,15 @@ public class implBTN extends BTN {
     public void addBSTRec(int nowy) {
         if(nowy>dane) {    
             if(prawy!=null) {
-            prawy.searchBSTRec(nowy);
+                prawy.addBSTRec(nowy);
             }
             else {
-                System.out.print("test"); 
                 prawy = new implBTN(nowy);
             }
         }
         if(nowy<dane) {
             if(lewy!=null) {
-              lewy.searchBSTRec(nowy);
+                lewy.addBSTRec(nowy);
             }
             else {
                 lewy = new implBTN(nowy);
@@ -146,8 +145,26 @@ public class implBTN extends BTN {
     }
 
     @Override
-    public Pair<BTN, BTN> searchBST(int szukany) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+     public Pair<BTN, BTN> searchBST(int szukany) {
+        BTN current = this;
+        BTN parent = null;
+         while(current!=null&&current.dane!=szukany) {
+            parent=current;
+            if(szukany>current.dane) {
+                current = current.prawy;
+            }
+            else if(szukany<current.dane) {
+                current = current.lewy;
+            }
+        }
+        if(current==null) {
+            return new Pair(new implBTN(0), parent);              // 0, bo NullPointerException
+        }
+        if(parent==null) {
+            return new Pair(current, new implBTN(0));  
+        }
+        return new Pair(current, parent);
+
+    } 
     
 }

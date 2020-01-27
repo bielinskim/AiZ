@@ -24,7 +24,7 @@ public class Lab04 {
         //             8 
         //      3              10
         //   1     6              14
-        //       4             13
+        //       4   7         13
         
         root.print(0);
         root.printPre();
@@ -37,7 +37,18 @@ public class Lab04 {
          //System.out.println(root.searchBSTRec(15));
          
          root.addBSTRec(5);
+         root.addBSTRec(0);
+      
          root.print(0);
+         root.printPre();
+         
+        System.out.println();
+        System.out.print(root.searchBST(4).first.dane+" ");
+        System.out.println(root.searchBST(4).second.dane);
+        
+        System.out.print(root.searchBST(2).first.dane+" ");
+        System.out.println(root.searchBST(2).second.dane);
+
     }
     
 }
