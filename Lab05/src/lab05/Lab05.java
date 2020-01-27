@@ -47,6 +47,8 @@ public class Lab05 {
          sort4.countsort(true);
          sort4.countsort(false);
          sort4.wypisz();
+         
+         //sort4.sortuj(true, SortZ.SortMethod.SELECTION);
     }
     
 }
