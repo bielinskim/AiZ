@@ -166,5 +166,19 @@ public class implBTN extends BTN {
         return new Pair(current, parent);
 
     } 
-    
+    public void insertBST(int nowy) {
+        Pair<BTN, BTN> pair = this.searchBST(nowy);
+        if(pair.first.dane==0)  {                               // miejsce dla nowego elementu musi byc wolne, by wyeliminowac przypadki nadpisania
+        if(pair.second.dane==0) {                               // jesli pierwszy element(rodzic i obecny musza byc = 0)
+            pair.first = new implBTN(nowy);
+        }
+        else if(pair.second.dane<nowy) {
+            pair.second.prawy = new implBTN(nowy);
+            
+        }
+        else if(pair.second.dane>nowy) {
+            pair.second.lewy = new implBTN(nowy);
+        }
+        }
+    }
 }
