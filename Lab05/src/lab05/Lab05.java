@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lab05;
 
 /**
  *
- * @author Student
+ * @author bielinskim
  */
 public class Lab05 {
 
@@ -41,8 +36,17 @@ public class Lab05 {
          MySort sort3 = new MySort();
          sort3.wypelnij(20,100);
          sort3.wypisz();
+         sort3.quicksort(0, sort.tab.length-1, false);
+         sort3.wypisz();
          sort3.quicksort(0, sort.tab.length-1, true);
          sort3.wypisz();
+         
+         MySort sort4 = new MySort();
+         sort4.wypelnij(10,5);
+         sort4.wypisz();
+         sort4.countsort(true);
+         sort4.countsort(false);
+         sort4.wypisz();
     }
     
 }
